@@ -11,9 +11,10 @@ const useChatStore = create(combine({
   messages: [],
   error: null,
 } as ChatState, (set) => ({
-  addMessage: (message: Message) => set((state) => ({
-    messages: [...state.messages, message]
-  })),
+  addMessage: (message: Message) => set(
+    (state) => ({
+      messages: [...state.messages, message]
+    })),
   clearMessages: () => set({ messages: [] }),
   setError: (error: string | null) => set({ error }),
   clearError: () => set({ error: null }),
