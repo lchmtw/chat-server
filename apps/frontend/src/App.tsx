@@ -1,7 +1,9 @@
+import ChatPage from "./features/chat/pages/ChatPage";
+
 function App() {
   return (
     <div>
-      Chat App
+      <ChatPage />
     </div>
   );
 }

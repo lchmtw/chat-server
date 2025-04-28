@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optionally, your custom layer overrides here */
+@layer base {
+    body {
+        @apply text-gray-900;
+    }
+}
