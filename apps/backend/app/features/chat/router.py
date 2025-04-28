@@ -5,7 +5,7 @@ from random import choices
 
 from .schemas import Message
 
-router = APIRouter(prefix="/chat")
+router = APIRouter(prefix="/messages")
 
 @router.post("/", response_model=Message)
 async def chat(payload: Message):

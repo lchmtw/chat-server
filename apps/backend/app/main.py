@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from types import FunctionType
+from fastapi.openapi.utils import get_openapi
 from random import choices
 import string
-
+import json
 import structlog
 
 from .core.config import settings
@@ -52,3 +53,16 @@ async def root():
 async def health_check():
     logger.debug("Health check called")
     return {"status": "healthy"} 
+
+def get_openapi_json():
+    openapi = get_openapi(
+        title=settings.PROJECT_NAME,
+        version="1.0.0",
+        description="This is my API description",
+        routes=app.routes,
+        )
+    with open("openapi.json", "w") as f:
+        json.dump(openapi, f)
+    return openapi
+
+get_openapi_json()

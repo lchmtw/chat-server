@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@hey-api/client-fetch": "^0.10.0",
     "tailwindcss": "3"
   }
 }

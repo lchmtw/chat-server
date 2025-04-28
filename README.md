@@ -9,6 +9,8 @@ monorepo/
 ├── apps/
 │   ├── frontend/     # React TypeScript app with Tailwind
 │   └── backend/      # FastAPI Python backend
+├── scripts/
+│   └── get-client.js # Scripts to get API client for frontend
 └── README.md
 ```
 
@@ -28,6 +30,9 @@ monorepo/
   - Structlog for logging
   - uv for package management
 
+- **Root**:
+  - @hey-api/openapi-ts for generating fetch client from backend's OpenAPI spec
+
 ## Getting Started
 
 ### Frontend
@@ -44,3 +49,11 @@ pnpm start
 cd apps/backend
 uv run -- uvicorn app.main:app --reload # uv should automatically install dependencies for you
 ``` 
+
+### Root
+
+```bash
+pnpm install --frozen-lockfile
+# Generate API Client for front
+pnpm get-client
+```

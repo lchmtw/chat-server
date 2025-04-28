@@ -24,3 +24,6 @@ venv/
 # Editor directories
 .vscode
 .cursor
+
+# Logs
+*.log
