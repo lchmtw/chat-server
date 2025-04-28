@@ -1,4 +1,4 @@
-import { Message } from "../types";
+import { Message } from "../schemas";
 import { cn } from "../../../lib/";
 
 function MessageBubble({ message }: { message: Message }) {

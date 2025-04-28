@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import useChatStore from "../store";
+import { useSendMessage } from "../hooks";
+import { v4 as uuidv4 } from 'uuid';
+import { Message } from "../schemas";
 
 function InputBox() {
   const { addMessage } = useChatStore();
@@ -11,6 +14,9 @@ function InputBox() {
 
   // State for tracking user composition
   const [isComposing, setIsComposing] = useState(false);
+
+  // Mutation for sending message
+  const { mutateAsync: sendMessage, isPending, isError } = useSendMessage();
 
   // Auto-grow the textarea to 10 lines of text
   useEffect(() => {
@@ -36,9 +42,18 @@ function InputBox() {
     setMessage(e.currentTarget.value);
   }
 
-  const handleSend = () => {
-    addMessage(message);
+  const handleSend = async () => {
+    const newMessage: Message = {
+      id: uuidv4(), content: message, role: 'user'
+    }
+    addMessage(newMessage);
     setMessage('');
+    try {
+      const response = await sendMessage(newMessage);
+      addMessage(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

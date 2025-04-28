@@ -1,6 +1,6 @@
 import { create, } from 'zustand'
 import { combine } from 'zustand/middleware'
-import { Message } from './types'
+import { Message } from './schemas'
 import { v4 as uuidv4 } from 'uuid';
 
 interface ChatState {
@@ -10,10 +10,8 @@ interface ChatState {
 const useChatStore = create(combine({
   messages: [],
 } as ChatState, (set) => ({
-  addMessage: (message: string) => set((state) => ({
-    messages: [...state.messages, {
-      id: uuidv4(), content: message, role: Math.random() > 0.5 ? 'user' : 'assistant'
-    }]
+  addMessage: (message: Message) => set((state) => ({
+    messages: [...state.messages, message]
   })),
   clearMessages: () => set({ messages: [] }),
 })))

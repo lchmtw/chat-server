@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from types import FunctionType
 from random import choices
+from uuid import uuid4
 import string
 
 import structlog
@@ -49,3 +50,8 @@ async def root():
 async def health_check():
     logger.debug("Health check called")
     return {"status": "healthy"} 
+
+@app.post("/chat")
+async def chat():
+    logger.info("Chat request received")
+    return {"id": uuid4(), "content": "Hi there!", "role": "assistant"}

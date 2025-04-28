@@ -16,8 +16,8 @@ function ChatPage() {
     );
   }
   return (
-    <div className="p-4 max-w-[800px] mx-auto flex flex-col gap-2 justify-between h-full">
-      <div className="flex flex-col gap-2 w-full mx-auto overflow-y-auto h-[80vh]">
+    <div className="p-4 max-w-[800px] mx-auto flex flex-col gap-2 justify-between h-screen">
+      <div className="flex flex-col gap-2 w-full mx-auto overflow-y-auto ">
         {messages.map((message, index) => (
           <MessageBubble key={index} message={message} />
         ))}
