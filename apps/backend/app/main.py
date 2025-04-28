@@ -2,13 +2,13 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from types import FunctionType
 from random import choices
-from uuid import uuid4
 import string
 
 import structlog
 
 from .core.config import settings
 from .core.logging import logger
+from .features.chat.router import router as chat_router
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -19,11 +19,13 @@ app = FastAPI(
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_origins=settings.BACKEND_CORS_ORIGINS,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+app.include_router(chat_router)
 
 @app.middleware("http")
 async def add_logs_and_trace(request: Request, call_next: FunctionType):
@@ -50,13 +52,3 @@ async def root():
 async def health_check():
     logger.debug("Health check called")
     return {"status": "healthy"} 
-
-@app.post("/chat")
-async def chat():
-    logger.info("Chat request received")
-    import random
-    if random.random() < 0.5:
-        return {"id": uuid4(), "content": "Hi there!", "role": "assistant"}
-    else:
-        from fastapi.exceptions import HTTPException
-        raise HTTPException(status_code=500, detail="Internal Server Error")
