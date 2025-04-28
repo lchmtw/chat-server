@@ -14,6 +14,7 @@ from .features.chat.router import router as chat_router
 app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_PATH}/openapi.json",
+    
 )
 
 # Set up CORS
@@ -49,7 +50,7 @@ async def root():
     logger.info("Root endpoint called")
     return {"message": "Welcome to the API"}
 
-@app.get("/health")
+@app.get(f"{settings.API_V1_PATH}/health")
 async def health_check():
     logger.debug("Health check called")
     return {"status": "healthy"} 

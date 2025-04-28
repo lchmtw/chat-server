@@ -16,30 +16,30 @@ export type ValidationError = {
     type: string;
 };
 
-export type ChatMessagesPostData = {
+export type ChatApiV1ChatPostData = {
     body: Message;
     path?: never;
     query?: never;
-    url: '/messages/';
+    url: '/api/v1/chat/';
 };
 
-export type ChatMessagesPostErrors = {
+export type ChatApiV1ChatPostErrors = {
     /**
      * Validation Error
      */
     422: HttpValidationError;
 };
 
-export type ChatMessagesPostError = ChatMessagesPostErrors[keyof ChatMessagesPostErrors];
+export type ChatApiV1ChatPostError = ChatApiV1ChatPostErrors[keyof ChatApiV1ChatPostErrors];
 
-export type ChatMessagesPostResponses = {
+export type ChatApiV1ChatPostResponses = {
     /**
      * Successful Response
      */
     200: Message;
 };
 
-export type ChatMessagesPostResponse = ChatMessagesPostResponses[keyof ChatMessagesPostResponses];
+export type ChatApiV1ChatPostResponse = ChatApiV1ChatPostResponses[keyof ChatApiV1ChatPostResponses];
 
 export type RootGetData = {
     body?: never;
@@ -55,14 +55,14 @@ export type RootGetResponses = {
     200: unknown;
 };
 
-export type HealthCheckHealthGetData = {
+export type HealthCheckApiV1HealthGetData = {
     body?: never;
     path?: never;
     query?: never;
-    url: '/health';
+    url: '/api/v1/health';
 };
 
-export type HealthCheckHealthGetResponses = {
+export type HealthCheckApiV1HealthGetResponses = {
     /**
      * Successful Response
      */

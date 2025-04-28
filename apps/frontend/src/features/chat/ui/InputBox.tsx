@@ -36,7 +36,9 @@ function InputBox() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
       e.preventDefault();
-      handleSend();
+      if (!isPending && !disabled) {
+        handleSend();
+      }
     }
   }
 

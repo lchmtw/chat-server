@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     API_V1_PATH: str = "/api/v1"
     
     # CORS
-    BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
+    BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000"]
     LOG_LEVEL: Literal['CRITICAL','FATAL','WARNING','WARN','INFO','DEBUG','NOTSET'] = "DEBUG"
     
     # Environment

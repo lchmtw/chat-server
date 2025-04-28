@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 from app.core.logging import logger
+from app.core.config import settings
 from uuid import uuid4
 from random import choices
 
 from .schemas import Message
 
-router = APIRouter(prefix="/messages")
+router = APIRouter(prefix=f"{settings.API_V1_PATH}/chat")
 
 @router.post("/", response_model=Message)
 async def chat(payload: Message):

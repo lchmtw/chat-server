@@ -1,18 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { Message, messageSchema } from "./schemas";
 import { apiErrorMessage, parseErrorMessage } from "./constants/messages";
-import { chatMessagesPost } from "../../client/";
+import { chatApiV1ChatPost } from "../../client/";
 import { createClient } from '@hey-api/client-fetch';
 
 const client = createClient({
-  baseUrl: 'http://localhost:8000',
+  baseUrl: 'http://localhost:8000/',
 });
 
 
 export const useSendMessage = () => useMutation({
   mutationFn: async (message: Message) => {
     // Post the message and return the response
-    const response = await chatMessagesPost({ client, body: message })
+    const response = await chatApiV1ChatPost({ client, body: message })
 
     // Check if the response is ok
     if (response.error) {
