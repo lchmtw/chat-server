@@ -7,7 +7,7 @@ load_dotenv()
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Backend API"
-    API_V1_PATH: str = "/api/v1"
+    API_V1_PATH: str = "/api"
     
     # CORS
     BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000"]
@@ -16,8 +16,5 @@ class Settings(BaseSettings):
     # Environment
     DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
 
 settings = Settings() 
