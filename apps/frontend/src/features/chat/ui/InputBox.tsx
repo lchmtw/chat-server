@@ -3,6 +3,7 @@ import useChatStore from "../store";
 import { useSendMessage } from "../hooks";
 import { v4 as uuidv4 } from 'uuid';
 import { Message } from "../schemas";
+import { unknownErrorMessage } from "../constants/messages";
 
 function InputBox() {
   const { addMessage, setError, error, clearError } = useChatStore();
@@ -50,7 +51,7 @@ function InputBox() {
       addMessage(response);
     } catch (error) {
       console.error(error);
-      setError(error instanceof Error ? error.message : "Failed to send message. Please try again.");
+      setError(error instanceof Error ? error.message : unknownErrorMessage);
     }
   }
 
