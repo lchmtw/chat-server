@@ -54,4 +54,9 @@ async def health_check():
 @app.post("/chat")
 async def chat():
     logger.info("Chat request received")
-    return {"id": uuid4(), "content": "Hi there!", "role": "assistant"}
+    import random
+    if random.random() < 0.5:
+        return {"id": uuid4(), "content": "Hi there!", "role": "assistant"}
+    else:
+        from fastapi.exceptions import HTTPException
+        raise HTTPException(status_code=500, detail="Internal Server Error")

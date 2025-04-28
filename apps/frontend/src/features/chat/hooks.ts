@@ -11,14 +11,14 @@ export const useSendMessage = () => useMutation({
 
     // Check if the response is ok
     if (!response.ok) {
-      throw new Error("Failed to send message");
+      throw new Error("Failed to send message.");
     }
 
     // Check if the response is a valid message
     const data = await response.json();
     const parsedData = messageSchema.safeParse(data);
     if (!parsedData.success) {
-      throw new Error("Failed to parse message");
+      throw new Error("Failed to parse message.");
     }
 
     // Return the parsed message
