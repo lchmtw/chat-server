@@ -1,0 +1,20 @@
+FROM node:20-slim
+
+WORKDIR /app
+
+# Install pnpm
+RUN npm install -g pnpm
+
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# No need to copy code as it will be mounted as a volume
+
+# Expose development port
+EXPOSE 3000
+
+# Start development server
+CMD ["pnpm", "start"] 

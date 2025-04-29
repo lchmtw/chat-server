@@ -11,6 +11,8 @@ monorepo/
 │   └── backend/      # FastAPI Python backend
 ├── scripts/
 │   └── get-client.js # Scripts to get API client for frontend
+├── docker-compose.yml     # Docker Compose for production
+├── docker-compose.dev.yml # Docker Compose for development
 └── README.md
 ```
 
@@ -28,14 +30,38 @@ monorepo/
   - Python
   - Pydantic for data validation
   - Structlog for logging
-  - uv for package management
 
 - **Root**:
   - @hey-api/openapi-ts for generating fetch client from backend's OpenAPI spec
+  - Docker for containerization
 
 ## Getting Started
 
-### Frontend
+### Using Docker
+
+#### Production Build
+
+```bash
+# Build and start all services
+docker-compose up --build
+
+# The frontend will be available at http://localhost:3000
+# The backend will be available at http://localhost:8000
+```
+
+#### Development Build (with hot reloading)
+
+```bash
+# Build and start all services in development mode
+docker-compose -f docker-compose.dev.yml up --build
+
+# The frontend will be available at http://localhost:3000 (with hot reloading)
+# The backend will be available at http://localhost:8000 (with hot reloading)
+```
+
+### Without Docker
+
+#### Frontend
 
 ```bash
 cd apps/frontend
@@ -43,14 +69,15 @@ pnpm install --frozen-lockfile
 pnpm start
 ```
 
-### Backend
+#### Backend
 
 ```bash
 cd apps/backend
-uv run -- uvicorn app.main:app --reload # uv should automatically install dependencies for you
+pip install -r requirements.txt
+uvicorn app.main:app --reload
 ``` 
 
-### Root
+#### Root
 
 ```bash
 pnpm install --frozen-lockfile
